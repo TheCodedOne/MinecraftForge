@@ -172,7 +172,7 @@
          }
          else
          {
-@@ -676,17 +744,36 @@
+@@ -676,30 +744,55 @@
          RenderHelper.func_74520_c();
          CreativeTabs creativetabs = CreativeTabs.field_78032_a[field_147058_w];
  
@@ -183,7 +183,7 @@
 +
 +        for (CreativeTabs creativetabs1 : java.util.Arrays.copyOfRange(CreativeTabs.field_78032_a,start,end))
          {
-             this.field_146297_k.func_110434_K().func_110577_a(field_147061_u);
+-            this.field_146297_k.func_110434_K().func_110577_a(field_147061_u);
  
 +            if (creativetabs1 == null) continue;
              if (creativetabs1.func_78021_a() != field_147058_w)
@@ -197,12 +197,10 @@
 +        {
 +            if (creativetabs != CreativeTabs.field_78027_g)
 +            {
-+                this.field_146297_k.func_110434_K().func_110577_a(field_147061_u);
 +                func_147051_a(CreativeTabs.field_78027_g);
 +            }
 +            if (creativetabs != CreativeTabs.field_78036_m)
 +            {
-+                this.field_146297_k.func_110434_K().func_110577_a(field_147061_u);
 +                func_147051_a(CreativeTabs.field_78036_m);
 +            }
 +        }
@@ -211,7 +209,14 @@
          this.func_73729_b(this.field_147003_i, this.field_147009_r, 0, 0, this.field_146999_f, this.field_147000_g);
          this.field_147062_A.func_146194_f();
          GlStateManager.func_179131_c(1.0F, 1.0F, 1.0F, 1.0F);
-@@ -700,6 +787,14 @@
+         int i = this.field_147003_i + 175;
+         int j = this.field_147009_r + 18;
+         int k = j + 112;
+-        this.field_146297_k.func_110434_K().func_110577_a(field_147061_u);
+ 
+         if (creativetabs.func_78017_i())
+         {
++            this.field_146297_k.func_110434_K().func_110577_a(creativetabs.getScrollbarTexture());
              this.func_73729_b(i, j + (int)((float)(k - j - 17) * this.field_147067_x), 232 + (this.func_147055_p() ? 0 : 12), 0, 12, 15);
          }
  
@@ -222,11 +227,12 @@
 +                return;
 +            }
 +        }
++        this.field_146297_k.func_110434_K().func_110577_a(creativetabs.getTabTexture(field_147058_w));
 +
          this.func_147051_a(creativetabs);
  
          if (creativetabs == CreativeTabs.field_78036_m)
-@@ -710,6 +805,14 @@
+@@ -710,6 +803,14 @@
  
      protected boolean func_147049_a(CreativeTabs p_147049_1_, int p_147049_2_, int p_147049_3_)
      {
@@ -241,16 +247,24 @@
          int i = p_147049_1_.func_78020_k();
          int j = 28 * i;
          int k = 0;
-@@ -806,6 +909,8 @@
+@@ -806,11 +907,14 @@
          }
  
          GlStateManager.func_179140_f();
 +        GlStateManager.func_179124_c(1F, 1F, 1F); //Forge: Reset color in case Items change it.
 +        GlStateManager.func_179147_l(); //Forge: Make sure blend is enabled else tabs show a white border.
++        this.field_146297_k.func_110434_K().func_110577_a(p_147051_1_.getTabTexture(field_147058_w));
          this.func_73729_b(l, i1, j, k, 28, 32);
          this.field_73735_i = 100.0F;
          this.field_146296_j.field_77023_b = 100.0F;
-@@ -827,6 +932,15 @@
+-        l = l + 6;
+-        i1 = i1 + 8 + (flag1 ? 1 : -1);
++        l = l + p_147051_1_.getTabIconOffsetX(field_147058_w);
++        i1 = i1 + p_147051_1_.getTabIconOffsetY(field_147058_w) + (flag1 ? 1 : -1);
+         GlStateManager.func_179145_e();
+         GlStateManager.func_179091_B();
+         ItemStack itemstack = p_147051_1_.func_151244_d();
+@@ -827,6 +931,15 @@
          {
              this.field_146297_k.func_147108_a(new GuiStats(this, this.field_146297_k.field_71439_g.func_146107_m()));
          }
@@ -266,7 +280,7 @@
      }
  
      public int func_147056_g()
-@@ -1031,6 +1145,39 @@
+@@ -1031,6 +1144,39 @@
          {
              return this.field_148332_b.func_82869_a(p_82869_1_);
          }
